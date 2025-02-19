@@ -42,20 +42,3 @@ Tags!(
   ⍤⤙≍ "<p><span>text</span></p>" P {Span {"text"}}
   ⍤⤙≍ "<p><span>text</span></p>" P {Span {"text"}}
 └─╴
-
-$Users {"Alice" "Bob" "Carol"}
-Html {
-  Head {
-    Title "Example"
-    Meta {!charset"utf-8"}
-    Style {!href"style.css"}
-  }
-  Body {
-    H₁ "Webua Example"
-    P "This is a simple example of Webua templating."
-    P {"Web dev for " A {!href"uiua.org" "Uiua"} "!"}
-    Br {}
-    H₂ "Users"
-    Ul ⍚Li
-  }
-}
