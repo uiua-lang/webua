@@ -10,7 +10,9 @@ Tags!(
 | Button
 | Div
 | Em
+| Form
 | Head
+| Html
 | H₁
 | H₂
 | H₃
@@ -18,13 +20,15 @@ Tags!(
 | H₅
 | H₆
 | I
-| Form
 | Li
+| Meta
 | Ol
 | P
 | Span
 | Strong
+| Style
 | Table
+| Title
 | Ul
 )
 
