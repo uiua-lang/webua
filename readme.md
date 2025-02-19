@@ -12,16 +12,16 @@ The `!` macro makes it easy to define attributes.
 ~ "git: github.com/uiua-lang/webua" ~ ! Html Head Body P Br H₁ Title Meta Style
 
 Html {
-    Head {
-        Title "Example"
-        Meta {!charset "utf-8"}
-        Style {!href "style.css"}
-    }
-    Body {
-        H₁ "Webua Example"
-        P "This is a simple example of Webua templating."
-        Br {}
-    }
+  Head {
+    Title "Example"
+    Meta {!charset "utf-8"}
+    Style {!href "style.css"}
+  }
+  Body {
+    H₁ "Webua Example"
+    P "This is a simple example of Webua templating."
+    Br {}
+  }
 }
 ```
 
