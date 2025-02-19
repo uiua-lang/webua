@@ -3,7 +3,7 @@
 # Expects an identifier that is the attribute name
 ! ←^ $"$\"_=\_\" repr"¯⌵⊢
 
-Attr ↚ $"_=_" °⊟↘1⊢regex "([a-z-]+)=(.*)"
+Attr ↚ $"_=_" °⊟↘1⊢regex "^([a-z-]+)=([^>]*)$"
 Tag ← $"<__>_</_>" ⤚⊙⊙∘ ⊙(
   ⍢∘⍣(1⊂⊙(□Attr°⊂))0 {}        # Extract attributes
   ⊓(⬚""/$"_ _"|⍥/$"__"=2⊸type) # Make inner strings
