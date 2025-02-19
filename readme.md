@@ -32,8 +32,8 @@ You can use normal Uiua primitives to fill out data.
 
 $Users {"Alice" "Bob" "Carol"}
 Div {
-    H₁ "Users"
-    Ul ⍚Li
+  H₁ "Users"
+  Ul ⍚Li
 }
 ## "<div><h1>Users</h1><ul><li>Alice</li><li>Bob</li><li>Carol</li></ul></div>"
 ```
