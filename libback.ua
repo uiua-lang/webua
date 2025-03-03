@@ -1,5 +1,4 @@
 Listener ← &tcpl "0.0.0.0:8080"
-&p $ Server started
 
 # ? Status Mime Bytes
 Response ← (
