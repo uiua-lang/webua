@@ -30,7 +30,11 @@ Tags!(
 | Table
 | Title
 | Ul
+| Script
 )
+
+# This doesn't do anything. It just wraps other elements. This is necessary so that functions can return one thing that contains multiple elemetns.
+W ← /$"_ _"
 
 ┌─╴test
   ⍤⤙≍ "<p>abc</p>" P "abc"

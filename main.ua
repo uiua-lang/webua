@@ -1,11 +1,40 @@
+# Experimental!
 ~ "libback.ua" ~ Response Serve!
+~ "libfront.ua" ~ ! A B Body Br Button Div Em Form Head Html H₁ H₂ H₃ H₄ H₅ H₆ I Li Meta Ol P Script Span Strong Style Table Title Ul W
 
-Home ← (
-  Response "200 OK" "text/plain" utf₈"home route"
+HXGet  ← $$ hx-get="_"
+HXPost ← $$ hx-post="_"
+HXSwap ← $$ hx-swap="_"
+
+ResHTML ← (Response "200 OK" "text/html" utf₈)
+
+~Item {name} (
+    W {
+      Button {HXSwap "outerHTML" HXGet $"/item-tog/_" name $"Item: _" name}
+      # Br {}
+    }
+  )
+
+Index ← (
+  Html {
+    Head {
+      Title "Webua"
+      Script {!src "https://unpkg.com/htmx.org@2.0.4"}
+    }
+    Body {
+      H₁ "Webua Example"
+      P "This is a simple example of Webua templating."
+      Item "a"
+      Item "b"
+      Item "c"
+    }
+  }
+  ResHTML
 )
 
-User ← (
-  Response "200 OK" "text/plain" utf₈ $"user is: _"
+RespondItem ← (
+  Item
+  ResHTML
 )
 
 NotFound ← (
@@ -13,8 +42,8 @@ NotFound ← (
 )
 
 Route ← ⍣(
-  ⍩Home°"/home"
-| ⍩User°$"/user/_"
+  ⍩Index°"/"
+| ⍩RespondItem¯ ?°$"/item-tog/_"
 | NotFound
 )
 
