@@ -66,3 +66,14 @@ Tags!(
 | Ul
 | Script
 )
+
+┌─╴test
+  ⍤⤙≍ "<p>abc</p>" P "abc"
+  ⍤⤙≍ "<p>abc</p>" P {"abc"}
+  ⍤⤙≍ "<h2>x</h2>" H₂ "x"
+  ⍤⤙≍ "<h2>x</h2>" H₂ {"x"}
+  ⍤⤙≍ "<p a=3 b=5 c=\"wow\">abc</p>" P {!a+1 2 !b5 !c"wow" "abc"}
+  ⍤⤙≍ "<p><span>text</span></p>" P Span "text"
+  ⍤⤙≍ "<p><span>text</span></p>" P {Span {"text"}}
+  ⍤⤙≍ "<p><span>text</span></p>" P {Span {"text"}}
+└─╴
