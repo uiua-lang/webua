@@ -1,19 +1,15 @@
 # Experimental!
-~ "libback.ua" ~ Response Serve!
-~ "libfront.ua" ~ ! A B Body Br Button Div Em Form Head Html H₁ H₂ H₃ H₄ H₅ H₆ I Li Meta Ol P Script Span Strong Style Table Title Ul W
+~ "libback.ua"
+  ~ ! A B Body Br Button Div Em Form Head Html H₁ H₂ H₃ H₄ H₅ H₆ I Li Meta Ol P Script Span Strong Style Table Title Ul
+  ~ HXGet HXSwap HXTarget ResHTML Response Serve!
 
-HXGet  ← $$ hx-get="_"
-HXPost ← $$ hx-post="_"
-HXSwap ← $$ hx-swap="_"
-
-ResHTML ← (Response "200 OK" "text/html" utf₈)
-
-~Item {name} (
-    W {
-      Button {HXSwap "outerHTML" HXGet $"/item-tog/_" name $"Item: _" name}
-      # Br {}
-    }
+Item ← Div {
+  ⊓(
+  | Button {HXSwap "outerHTML" HXTarget "closest div" ⊃(HXGet $"/item-tog/_"|$"Item: _")}
+  | Br {}
+    Br {}
   )
+}
 
 Index ← (
   Html {

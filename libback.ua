@@ -1,4 +1,12 @@
+Xml ~ "xml" ~ ! Tags!
+~ "xml" ~ ! Tags!
+
 Listener ← &tcpl "0.0.0.0:8080"
+
+HXGet    ← $$ hx-get="_"
+HXPost   ← $$ hx-post="_"
+HXSwap   ← $$ hx-swap="_"
+HXTarget ← $$ hx-target="_"
 
 # ? Status Mime Bytes
 Response ← (
@@ -10,6 +18,8 @@ Response ← (
   $$ 
   ⊂ utf₈
 )
+
+ResHTML ← (Response "200 OK" "text/html" utf₈)
 
 Respond! ← ◌pool(
   &p $"Request from _" &tcpaddr.
@@ -25,3 +35,34 @@ Respond! ← ◌pool(
 )
 
 Serve! ← ⍢(⍣Respond!(^0)⋅&p &tcpa Listener)1
+
+Tags!(
+  A
+| B
+| Body
+| Br
+| Button
+| Div
+| Em
+| Form
+| Head
+| Html
+| H₁
+| H₂
+| H₃
+| H₄
+| H₅
+| H₆
+| I
+| Li
+| Meta
+| Ol
+| P
+| Span
+| Strong
+| Style
+| Table
+| Title
+| Ul
+| Script
+)
