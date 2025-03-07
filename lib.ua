@@ -1,6 +1,40 @@
 Xml ~ "xml" ~ ! Tags!
-
 ~ "xml" ~ ! Tags!
+
+Listener ← &tcpl "0.0.0.0:8080"
+
+HXGet    ← $$ hx-get="_"
+HXPost   ← $$ hx-post="_"
+HXSwap   ← $$ hx-swap="_"
+HXTarget ← $$ hx-target="_"
+
+# ? Status Mime Bytes
+Response ← (
+  ⊙⊙(⧻.)
+  $$ HTTP/1.1 _
+  $$ Content-Type: _
+  $$ Content-Length: _
+  $$ 
+  $$ 
+  ⊂ utf₈
+)
+
+ResHTML ← (Response "200 OK" "text/html" utf₈)
+
+Respond! ← ◌pool(
+  &p $"Request from _" &tcpaddr.
+  # Extract path from request
+  °□⊡1 ⊜□≠@\s . &ru "\r\n\r\n".
+  &p $"Request:\n_".
+
+  ^0
+  &p⊸($"Response: _ bytes" ⧻)
+
+  # Send response
+  ⊃⋅&cl&w
+)
+
+Serve! ← ⍢(⍣Respond!(^0)⋅&p &tcpa Listener)1
 
 Tags!(
   A
@@ -30,6 +64,7 @@ Tags!(
 | Table
 | Title
 | Ul
+| Script
 )
 
 ┌─╴test
