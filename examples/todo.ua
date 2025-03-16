@@ -1,7 +1,7 @@
 # Experimental!
-~ "lib.ua"
+~ "../lib.ua"
   ~ ! A B Body Br Button Div Em Form Head Html H₁ H₂ H₃ H₄ H₅ H₆ I Li Meta Ol P Script Span Strong Style Table Title Ul
-  ~ HXGet HXSwap HXTarget ResHTML Response Serve!
+  ~ HXGet HXSwap HXTarget NotFound ResHTML Response Serve!
 
 Item ← Div {
   ⊓(
@@ -31,10 +31,6 @@ Index ← (
 RespondItem ← (
   Item
   ResHTML
-)
-
-NotFound ← (
-  Response "404 Not Found" "text/plain" utf₈"Not Found"
 )
 
 Route ← ⍣(

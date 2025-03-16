@@ -36,6 +36,10 @@ Respond! ← ◌pool(
 
 Serve! ← ⍢(⍣Respond!(^0)⋅&p &tcpa Listener)1
 
+NotFound ← (
+  Response "404 Not Found" "text/plain" utf₈"Not Found"
+)
+
 Tags!(
   A
 | B

@@ -40,4 +40,4 @@ Div {
 
 # Routing
 
-Actual server routing is not implemented yet.
+Server routing is implemented by passing a router function to the Serve! macro. See the examples for how to do this.
