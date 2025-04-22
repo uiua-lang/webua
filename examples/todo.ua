@@ -1,42 +1,34 @@
 # Experimental!
-~ "../lib.ua"
-  ~ ! A B Body Br Button Div Em Form Head Html H₁ H₂ H₃ H₄ H₅ H₆ I Li Meta Ol P Script Span Strong Style Table Title Ul
-  ~ HXGet HXSwap HXTarget NotFound ResHTML Response Serve!
+Html ~ "../lib.ua" ~ HtmlResp NotFound Serve!
 
-Item ← Div {
-  ⊓(
-  | Button {HXSwap "outerHTML" HXTarget "closest div" ⊃(HXGet $"/item-tog/_"|$"Item: _")}
-  | Br {}
-    Br {}
-  )
-}
+Item ← Html!(
+  Div{⊓(
+      Button {HXSwap "outerHTML" HXTarget "closest div" ⊃(HXGet $"/item-tog/_"|$"Item: _")}
+    | Br {}
+    )}
+)
 
-Index ← (
+Index ← Html!(
   Html {
     Head {
       Title "Webua"
+      Meta {!charset "utf-8"}
       Script {!src "https://unpkg.com/htmx.org@2.0.4"}
     }
     Body {
       H₁ "Webua Example"
-      P "This is a simple example of Webua templating."
+      P "This is a simple example of Webua templating with HTMX!"
       Item "a"
       Item "b"
       Item "c"
     }
   }
-  ResHTML
-)
-
-RespondItem ← (
-  Item
-  ResHTML
 )
 
 Route ← ⍣(
-  ⍩Index°"/"
-| ⍩RespondItem¯ ?°$"/item-tog/_"
+  ⍩(HtmlResp Index) °"/"
+| ⍩(HtmlResp Item) ¯ °$"/item-tog/_"
 | NotFound
 )
 
-Serve!(Route)
+Serve!Route 8080

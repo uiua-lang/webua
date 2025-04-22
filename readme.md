@@ -9,9 +9,9 @@ Templating is done with tag functions. A tag function is passed a list of attrib
 The `!` macro makes it easy to define attributes.
 
 ```uiua
-~ "git: github.com/uiua-lang/webua" ~ ! Html Head Body P Br H₁ Title Meta Style
+Html ~ "git: github.com/uiua-lang/webua"
 
-Html {
+Html!(Html {
   Head {
     Title "Example"
     Meta {!charset "utf-8"}
@@ -22,19 +22,19 @@ Html {
     P "This is a simple example of Webua templating."
     Br {}
   }
-}
+})
 ```
 
 You can use normal Uiua primitives to fill out data.
 
 ```uiua
-~ "git: github.com/uiua-lang/webua" ~ Div H₁ Ul Li
+~ "git: github.com/uiua-lang/webua"
 
 $Users {"Alice" "Bob" "Carol"}
-Div {
+Html!(Div {
   H₁ "Users"
   Ul ⍚Li
-}
+})
 ## "<div><h1>Users</h1><ul><li>Alice</li><li>Bob</li><li>Carol</li></ul></div>"
 ```
 

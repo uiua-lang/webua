@@ -1,16 +1,15 @@
 Xml ~ "xml" ~ ! Tags!
 ~ "xml" ~ ! Tags!
 
-Listener ← &tcpl "0.0.0.0:8080"
-
 HXGet    ← $$ hx-get="_"
 HXPost   ← $$ hx-post="_"
 HXSwap   ← $$ hx-swap="_"
 HXTarget ← $$ hx-target="_"
 
-# ? Status Mime Bytes
+# Construct an HTTP response
+# ResponseBytes ? Status Mime Bytes
 Response ← (
-  ⊙⊙(⧻.)
+  ⊙⊙⊸⧻
   $$ HTTP/1.1 _
   $$ Content-Type: _
   $$ Content-Length: _
@@ -18,26 +17,32 @@ Response ← (
   $$ 
   ⊂ utf₈
 )
+# Construct a simple text HTTP response
+TextResp ← Response "200 OK" "text/html" utf₈
+# A simple not found HTTP response
+NotFound ← (Response "404 Not Found" "text/plain" utf₈"Not Found")
+# Construct a simple HTML HTTP response
+HtmlResp ← Response "200 OK" "text/html" utf₈
 
-ResHTML ← (Response "200 OK" "text/html" utf₈)
-
-Respond! ← ◌pool(
-  &p $"Request from _" &tcpaddr.
-  # Extract path from request
-  °□⊡1 ⊜□≠@\s . &ru "\r\n\r\n".
-  &p $"Request:\n_".
-
-  ^0
-  &p⊸($"Response: _ bytes" ⧻)
-
-  # Send response
-  ⊃⋅&cl&w
+Respond! ← (
+  &w⊸(
+    ⟜(&p $"Request from _" &tcpaddr)
+    °□⊡1 ⊜□⊸≠@\s &ru "\r\n\r\n"
+    ⟜(&p $"Request:\n_")
+    ^0
+    ⟜(&p $"Response: _ bytes" ⧻)
+  )
 )
 
-Serve! ← ⍢(⍣Respond!(^0)⋅&p &tcpa Listener)1
+Sig! ↚^ ⋅⊢
 
-NotFound ← (
-  Response "404 Not Found" "text/plain" utf₈"Not Found"
+# Start a server on the given port.
+# The function will be called on the TCP socket for each incoming connection.
+# ? Port
+Serve! ← (
+  &tcpl $"0.0.0.0:_"
+  ⟜(&p $"Server started on _" &tcpaddr)
+  ⍢(⍜&tcpa(⍣Respond!^0⋅&p))1
 )
 
 Tags!(
