@@ -49,7 +49,11 @@ Tags!(
 | Div
 | Em
 | Form
+| Input
 | Head
+| Link
+| Details
+| Summary
 | Html
 | H₁
 | H₂
