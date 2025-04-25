@@ -40,4 +40,9 @@ Html!(Div {
 
 # Routing
 
-Server routing is implemented by passing a router function to the Serve! macro. See the examples for how to do this.
+Server routing is implemented by passing a router function to the Serve! macro. See the [examples](https://github.com/uiua-lang/webua/tree/main/examples).
+
+# Sites
+
+These sites are built with Webua:
+- [scrabble.vxcc.dev](https://scrabble.vxcc.dev) ([github](https://github.com/Jacob-Lockwood/scrabble-dictionary))
