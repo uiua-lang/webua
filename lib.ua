@@ -10,11 +10,13 @@ HXTarget ← $$ hx-target="_"
 # ResponseBytes ? Status Mime Bytes
 Response ← (
   ⊙⊙⊸⧻
-  $$ HTTP/1.1 _
-  $$ Content-Type: _
-  $$ Content-Length: _
-  $$ 
-  $$ 
+
+  ⊓($"HTTP/1.1 _\r\n"
+  | $"Content-Type: _; charset=UTF-8\r\n"
+  | $"Content-Length: _\r\n\r\n"
+  )
+  ⊂⊂
+
   ⊂ utf₈
 )
 # Construct a simple text HTTP response
