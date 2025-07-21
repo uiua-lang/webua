@@ -3,8 +3,8 @@ Html ~ "../lib.ua" ~ HtmlResp NotFound Serve!
 
 Item ← Html!(
   Div{⊓(
-      Button {HXSwap "outerHTML" HXTarget "closest div" ⊃(HXGet $"/item-tog/_"|$"Item: _")}
-    | Br {}
+      Button X:{HXSwap "outerHTML" HXTarget "closest div" HXGet $"/item-tog/_"} ⟜$"Item: _"
+    | Br
     )}
 )
 
@@ -12,8 +12,8 @@ Index ← Html!(
   Html {
     Head {
       Title "Webua"
-      Meta {!charset "utf-8"}
-      Script {!src "https://unpkg.com/htmx.org@2.0.4"}
+      Meta Charset:"utf-8"
+      Script Src:"https://unpkg.com/htmx.org@2.0.4" {}
     }
     Body {
       H₁ "Webua Example"
