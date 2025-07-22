@@ -1,10 +1,10 @@
 # Webua
 
-This is a *very* work-in-progress [Uiua](https://uiua.org) backend web framework.
+This is a _very_ work-in-progress [Uiua](https://uiua.org) backend web framework.
 
 # Templating
 
-Templating is done with tag functions. A tag function is given attributes using (experimental) [optional arguments](https://www.uiua.org/docs/experimental#data-functions) corresponding to HTML attribute names. Any unrecognized attributes can be specified using the optional argument `X` which inserts arbitrary code into the tag. Tag functions which take children do so via a stack argument, which is joined together into a string if it's a list of boxes.
+Templating is done with tag functions. A tag function is given attributes using data definition field setters (`°⊸Attr Value`) corresponding to HTML attribute names. Any unrecognized attributes can be specified using the field `X` which inserts arbitrary code into the tag. Tag functions which take children do so via a stack argument, which is joined together into a string if it's a list of boxes.
 
 ```uiua
 Html ~ "git: github.com/uiua-lang/webua"
@@ -12,8 +12,8 @@ Html ~ "git: github.com/uiua-lang/webua"
 Html!(Html {
   Head {
     Title "Example"
-    Meta Charset:"utf-8"
-    Style Href:"style.css"
+    Meta!°⊸Charset"utf-8"
+    Style!°⊸Href"style.css"
   }
   Body {
     H₁ "Webua Example"
@@ -43,4 +43,5 @@ Server routing is implemented by passing a router function to the Serve! macro. 
 # Sites
 
 These sites are built with Webua:
+
 - [scrabble.vxcc.dev](https://scrabble.vxcc.dev) ([github](https://github.com/Jacob-Lockwood/scrabble-dictionary))

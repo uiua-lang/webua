@@ -1,7 +1,5 @@
-# Experimental!
-
-Xml ~ "xml" ~ Attrs Children Elem! M! Void!
-~ "xml" ~ Elem! Void!
+Xml ~ "xml" ~ Elem! Html Html! Void!
+~ "xml" ~ Elem! Html Html! Void!
 
 HXGet    ← $$ hx-get="_"
 HXPost   ← $$ hx-post="_"
@@ -38,8 +36,6 @@ Respond! ← (
   )
 )
 
-Sig! ↚^ ⋅⊢
-
 # Start a server on the given port.
 # The function will be called on the TCP socket for each incoming connection.
 # ? Port
@@ -48,8 +44,6 @@ Serve! ← (
   ⟜(&p $"Server started on _" &tcpaddr)
   ⍢(⍜&tcpa(⍣Respond!^0⋅&p))1
 )
-
-(˜⊂"⊙Children" M!˙$"<!DOCTYPE html><_\_>\_</_>")^!(Html|Xmlns)
 
 Elem!(A|Attributionsrc Download Href Hreflang Ping Referrerpolicy Rel Target Type)
 Elem!(Abbr|)
@@ -169,13 +163,14 @@ Void!(Wbr|)
 
 ┌─╴test
   ⍤⤙≍ "<p>abc</p>" P "abc"
-  ⍤⤙≍ "<p>abc</p>" P {"abc"}
   ⍤⤙≍ "<h2>x</h2>" H₂ "x"
-  ⍤⤙≍ "<h2>x</h2>" H₂ {"x"}
-  ⍤⤙≍ "<img />" Img
-  ⍤⤙≍ "<img src=\"x\" />" Img Src:"x"
-  ⍤⤙≍ "<p class=\"5\" id=\"3\" c=\"wow\">abc</p>" P Class:"5" Id:(+1 2) X:"c=\"wow\"" "abc"
-  ⍤⤙≍ "<button class=\"btn\" hx-get=\"/foo\" hx-target=\"div\">click me</button>" Button Class:"btn" X:{HXGet "/foo" HXTarget "div"} "click me"
+  ⍤⤙≍ "<p>a<span>b</span>c</p>" P {"a" Span "b" "c"}
+  ⍤⤙≍ "<br />" Br
+  ⍤⤙≍ "<img src=\"x\" />" Img!°⊸Src "x"
+  ⍤⤙≍ "<p class=\"5\" id=\"3\" c=\"wow\">abc</p>" P!(°⊸Class"5" °⊸Id +1 2 °⊸X"c=\"wow\"") "abc"
+  ⍤⤙≍ "<button class=\"btn\" hx-get=\"/foo\" hx-target=\"div\">click me</button>" Button!(
+    °⊸Class "btn" °⊸X {HXGet "/foo" HXTarget "div"}
+  ) "click me"
   ⍤⤙≍ "<p><span>text</span></p>" P Span "text"
   ⍤⤙≍ "<p><span>text</span></p>" P {Span {"text"}}
   ⍤⤙≍ "<!DOCTYPE html><html>hi</html>" Html "hi"

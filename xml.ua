@@ -7,19 +7,30 @@ Attrs ← (
   ⊂∩(⍥(⊂@\s)±⊸⧻) /$"_ _"⍚$"_=_"
 )
 Children ← ⍥/$"__"=2⊸type
-# ^0 maps a tag name to the appropriate format string.
-M! ← (
-  ⊙(⊂□"X" ⊂GlobalAttrs ⊜□⊸≠@\s)°□₂
-  ⊃(NrmId|∘|/$"_|_"⋅⍚$"_ ← NaN"|^0NrmId|repr⋅⍚NrmId)
-  $$ # Make a <_> element.
-  $$ # Use Attr:"value" to set attributes, or X:"my-prop=\"value\"" to insert any which are unrecognized.
-  $$ ~_ {_} $"_" Attrs _
-)
+# ^0 is the tag format, ^1 is inserted before the tag call
+M‼ ← /$"_\n_"⊃{
+  $"┌╶╶M_"
+| $"~ {_}" ⋅(/$"_|_"⍚$"_←NaN"⊂□"X"⊂GlobalAttrs)
+| ⊙^1 ^0 NrmId
+  $$ Impl ← $"_" Attrs ⍚NrmId Fields _
+| $ └╶╶
+| $"# <_> element with no attributes." NrmId
+| ˙$"_ ← M_!(Impl New)"
+| $"# Make _ <_> element." ⨬"a""an"∊"aeiou"⊸⊢ NrmId
+| $ # Use °⊸Attr to set known attributes, or °⊸X to insert any which aren't recognized.
+| $$ _! ←^ (
+| $$ $"M_!(\_)"⊢
+| $"˙$$ M_!(_)" ⊙$ Impl _(˜⊂"New"˜↯@⊙-1⊢⋅⊢)^!_
+| $ )
+} ⊙(⊜□⊸≠@\s)°□₂
 # Define an HTML element taking children.
 # The first pack function is an identifier mapping to the HTML tag.
 # The second pack function is a space-separated list of attribute identifiers.
-Elem! ←^ ˜⊂"⊙Children"M!˙$"<_\_>\_</_>"
+Elem! ←^ M‼˙$"<_\_>\_</_>""⊙Children"
 # Define an HTML element which doesn't take any children.
 # The first pack function is an identifier mapping to the HTML tag.
 # The second pack function is a space-separated list of attribute identifiers.
-Void! ←^ M!$"<_\_ />"
+Void! ←^ M‼$"<_\_ />"""
+
+WithDoctype! ↚^ M‼˙$"<!DOCTYPE html><_\_>\_</_>""⊙Children"
+WithDoctype!(Html|Xmlns)
