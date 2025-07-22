@@ -8,7 +8,7 @@ Attrs ← (
 )
 Children ← ⍥/$"__"=2⊸type
 # ^0 is the tag format, ^1 is inserted before the tag call
-M‼ ← /$"_\n_"⊃{
+M‼ ← ⟜&p/$"_\n_"⊃{
   $"┌╶╶M_"
 | $"~ {_}" ⋅(/$"_|_"⍚$"_←NaN"⊂□"X"⊂GlobalAttrs)
 | ⊙^1 ^0 NrmId
@@ -18,10 +18,12 @@ M‼ ← /$"_\n_"⊃{
 | ˙$"_ ← M_!(Impl New)"
 | $"# Make _ <_> element." ⨬"a""an"∊"aeiou"⊸⊢ NrmId
 | $ # Use °⊸Attr to set known attributes, or °⊸X to insert any which aren't recognized.
-| $$ _! ←^ (
-| $$ $"M_!(\_)"⊢
-| $"˙$$ M_!(_)" ⊙$ Impl _(˜⊂"New"˜↯@⊙-1⊢⋅⊢)^!_
-| $ )
+| ⊂$"_!←" ⟜(
+    $"_!(_)" ⟜(
+      $"_!^0"
+      ˙$$ Impl _(˜⊂"New"˜↯@⊙-1⊢⋅⊢)^!_
+    ) ⊂@M
+  )
 } ⊙(⊜□⊸≠@\s)°□₂
 # Define an HTML element taking children.
 # The first pack function is an identifier mapping to the HTML tag.
