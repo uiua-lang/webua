@@ -10,6 +10,13 @@ Children ← ⍥/$"__"=2⊸type
 # ^0 is the tag format, ^1 is inserted before the tag call
 M‼ ← /$"_\n_"⊃{
   $"┌╶╶M_"
+  # ! don't uncomment this part for now, it will kill LSP!
+  # | $ ~ {
+  #   $   # Set arbitrary attributes
+  #   $   X ← NaN
+  #   # | /$"_\n_"⍚($"# Set the attribute `_`\n_"⊸NrmId) ⊂⋅GlobalAttrs
+  # | /$"_|_"⊂⋅GlobalAttrs
+  # | $ }
 | $"~ {_}" ⋅(/$"_|_"⍚$"_←NaN"⊂□"X"⊂GlobalAttrs)
 | ⊙^1 ^0 NrmId
   $$ Impl ← $"_" Attrs ⍚NrmId Fields _
@@ -18,18 +25,19 @@ M‼ ← /$"_\n_"⊃{
 | ˙$"_ ← M_!(Impl New)"
 | $"# Make _ <_> element." ⨬"a""an"∊"aeiou"⊸⊢ NrmId
 | $ # Use °⊸Attr to set known attributes, or °⊸X to insert any which aren't recognized.
-| $$ _! ←^ (
-| $$ $"M_!(\_)"⊢
-| $"˙$$ M_!(_)" ⊙$ Impl _(˜⊂"New"˜↯@⊙-1⊢⋅⊢)^!_
-| $ )
+| ⊂$"_!←" ⟜(
+    $"_!(_)" ⟜˙$"Impl _!^0(˜⊂\"New\"˜↯@⊙-1⊢⋅⊢)^!_!^0" ⊂@M
+  )
 } ⊙(⊜□⊸≠@\s)°□₂
 # Define an HTML element taking children.
 # The first pack function is an identifier mapping to the HTML tag.
 # The second pack function is a space-separated list of attribute identifiers.
+# PascalCase identifiers become kebab-case in HTML. Subscripts become digits.
 Elem! ←^ M‼˙$"<_\_>\_</_>""⊙Children"
 # Define an HTML element which doesn't take any children.
 # The first pack function is an identifier mapping to the HTML tag.
 # The second pack function is a space-separated list of attribute identifiers.
+# PascalCase identifiers become kebab-case in HTML. Subscripts become digits.
 Void! ←^ M‼$"<_\_ />"""
 
 WithDoctype! ↚^ M‼˙$"<!DOCTYPE html><_\_>\_</_>""⊙Children"
