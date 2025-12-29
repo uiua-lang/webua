@@ -12,8 +12,8 @@ Html ~ "git: github.com/uiua-lang/webua"
 Html!(Html {
   Head {
     Title "Example"
-    Meta!°⊸Charset"utf-8"
-    Style!°⊸Href"style.css"
+    Meta!°⊸Charset "utf-8"
+    Link!°⊸⊃Rel Href "stylesheet" "style.css"
   }
   Body {
     H₁ "Webua Example"
