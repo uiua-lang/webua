@@ -23,6 +23,8 @@ Response ← (
 TextResp ← Response "200 OK" "text/html" utf₈
 # A simple not found HTTP response
 NotFound ← (Response "404 Not Found" "text/plain" utf₈"Not Found")
+# Construct a not found HTML HTTP response
+NotFoundHtml ← Response "404 Not Found" "text/html" utf₈
 # Construct a simple HTML HTTP response
 HtmlResp ← Response "200 OK" "text/html" utf₈
 
